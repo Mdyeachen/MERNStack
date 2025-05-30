@@ -8,7 +8,7 @@ import productRoutes from './routers/product.router.js';
 dotEnv.config();
 
 const app = express();
-const PORT = process.env.PORT || 5000;
+const PORT = Number(process.env.PORT) || 5000;
 
 //middle ware
 app.use(express.json());
