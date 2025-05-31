@@ -1,5 +1,7 @@
 import { Box, Container, Heading, useColorModeValue, VStack, Input, Button } from "@chakra-ui/react"
 import { useState } from "react"
+import { useProductStore } from "../store/product"
+import { useToast } from '@chakra-ui/react'
 
 function Create() {
   const [ newProduct, setNewProduct ] = useState({
@@ -8,9 +10,37 @@ function Create() {
     image : ""
   })
 
-  const handleAddProduct = () => {
-    console.log(newProduct)
+  const toast = useToast()
+  const { createProduct } = useProductStore();
+
+  const handleAddProduct = async () => {
+    const { success , message } = await createProduct(newProduct)
+
+    if (!success) {
+    toast({
+      title: "Error",
+      description: message,
+      status: "error",
+      isClosable: true
+    })
+    } else {
+      toast({
+        title: "Success",
+        description: message,
+        status: "success",
+        isClosable: true,
+      })
+
+
+      setNewProduct({
+        name : "",
+        price : "",
+        image : ""
+      })
+    }
   }
+
+  
 
   return (
     <Container maxW={"1140px"} minH="86vh" px={"4"} display="flex" alignItems={"center"} justifyContent={"center"}>
@@ -41,7 +71,7 @@ function Create() {
                   onChange={(e) => setNewProduct({...newProduct, image : e.target.value})}
                 />
 
-                <Button bg="#096B68" color="#fff" w="full" onClick={handleAddProduct}>
+                <Button bg="#096B68" color="#fff" w="full" onClick={handleAddProduct}  _hover={{ bg: "#064F4D" }}>
                   Add Product
                 </Button>
               </VStack>
