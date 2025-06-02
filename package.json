@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "nodemon ./backend/server",
     "build" : "npm install && npm install --prefix fontend && npm run build --prefix fontend",
-    "start" : "node backend/server.js"
+    "start" : "node ./backend/server"
   },
   "type": "module",
   "keywords": [],
