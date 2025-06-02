@@ -9,14 +9,6 @@ export default defineConfig({
       "/api":{
         target : "http://localhost:3000"
       }
-    },
-    port : 8000,
-    open : true
-  },
-  build : {
-    sourcemap : true
-  },
-  css : {
-    devSourcemap : true
+    }
   }
 })

@@ -22,11 +22,12 @@ app.get('/', (req, res) => {
 app.use('/api/products', productRoutes)
 
 if(NODE_ENV === "production"){
-    app.use(express.static(path.join(__dirname, "fontend", "dist")));
+    app.use(express.static(path.join(__dirname, "/frontend/dist")));
 
-    app.get("/*", (req, res) => {
-        res.sendFile(path.resolve(__dirname, "fontend", 'dist', "index.html"))
-    })
+    app.get("*", (req, res) => {
+        console.log("hello")
+        res.sendFile(path.resolve(__dirname, "frontend", 'dist', "index.html"));
+    });
 }
 
 app.listen(PORT, () => {
