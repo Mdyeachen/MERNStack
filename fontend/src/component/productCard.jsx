@@ -36,7 +36,7 @@ function ProductCard({ product }) {
   const handleUpdateProduct = async (pid, updateProduct) => {
     const result = await updateProducts(pid, updateProduct);
     const { success, message } = result || {};
-
+    console.log(success)
     if(!success) {
         toast({
           title : "Error",

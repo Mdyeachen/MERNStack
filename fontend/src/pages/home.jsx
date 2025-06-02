@@ -4,7 +4,6 @@ import { Link } from "react-router-dom"
 import { useProductStore } from "../store/product"
 import ProductCard from "../component/productCard"
 function Home() { 
-
   const { fetchProduct, products } = useProductStore();
 
   useEffect(() => {
@@ -31,9 +30,6 @@ function Home() {
 
           <Box position='relative' padding='10'>
             <Divider />
-            <AbsoluteCenter bg='white' px='10'>
-              
-            </AbsoluteCenter>
           </Box>
 
 
@@ -42,13 +38,14 @@ function Home() {
               md : 2,
               lg : 3
             }} spacing={10} w="full">
-              {products.map((product) => {
-                return <ProductCard key={product._id} product={product} />
-                
-              })}
+              {products
+                .filter((product) => product) // filters out undefined/null
+                .map((product) => (
+                  <ProductCard key={product._id} product={product} />
+              ))}
             </SimpleGrid>
 
-            {products.length < 0 && (
+            {products.length == 0 && (
               <Heading 
                 as={"h2"} 
                 size="md" 
